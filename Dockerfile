@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 USER root
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     autoconf \
     curl \
     gcc \
@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     python-levenshtein \
     python-m2crypto \
     python-pip \
+    python-setuptools \
     ssdeep \
     supervisor \
     swig \
