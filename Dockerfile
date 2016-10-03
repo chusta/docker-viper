@@ -2,32 +2,45 @@ FROM ubuntu:16.04
 
 USER root
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    autoconf \
-    curl \
-    gcc \
-    git \
-    libffi-dev \
-    libfuzzy-dev \
-    libimage-exiftool-perl \
-    libssl-dev \
-    libtool \
-    pff-tools \
-    python-dev \
-    python-levenshtein \
-    python-m2crypto \
-    python-pip \
-    python-setuptools \
-    ssdeep \
-    supervisor \
-    swig \
-    yara \
-  && rm -rf /var/lib/apt/lists/*
+  autoconf \
+  curl \
+  exiftool \
+  gcc \
+  git \
+  libffi-dev \
+  libfuzzy-dev \
+  libimage-exiftool-perl \
+  libssl-dev \
+  libtool \
+  pff-tools \
+  python-dev \
+  python-levenshtein \
+  python-pip \
+  python-setuptools \
+  python-wheel \
+  radare2 \
+  ssdeep \
+  supervisor \
+  swig \
+  yara \
+&& rm -rf /var/lib/apt/lists/*
 
 RUN apt-get clean && apt-get autoclean
 
 RUN pip install --upgrade pip \
   androguard \
-  PySocks
+  BeautifulSoup \
+  bitstring \
+  cryptography \
+  M2Crypto \
+  olefile \
+  pdftools \
+  pefile \
+  pyclamd \
+  pylzma \
+  PySocks \
+  r2pipe \
+  requests
 
 RUN groupadd -r viper && \
   useradd -r -g viper -d /home/viper -s /sbin/nologin viper && \
@@ -48,6 +61,7 @@ RUN chmod a+xr viper-update \
 RUN pip install -r requirements.txt
 
 RUN mkdir /etc/viper /viper && chown viper:viper /viper
+
 COPY viper.conf /etc/viper/viper.conf
 
 RUN ln -s /home/viper/viper/viper-update /usr/local/bin/viper-update && \
@@ -56,8 +70,9 @@ RUN ln -s /home/viper/viper/viper-update /usr/local/bin/viper-update && \
   ln -s /home/viper/viper/viper-cli /usr/local/bin/viper-cli
 
 RUN mkdir -p /var/lock/viper-web \
-             /var/lock/viper-api \
-             /var/log/supervisor
+  /var/lock/viper-api \
+  /var/log/supervisor
+
 COPY supervisord.conf /etc/supervisor/viper.conf
 
 EXPOSE 8080 9090
