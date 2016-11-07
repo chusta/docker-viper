@@ -1,11 +1,8 @@
 # docker-viper
 
-dockerized [viper](https://github.com/viper-framework/viper) for Ubuntu 16.04
+dockerized [viper](https://github.com/viper-framework/viper)
 
 ## Overview
-
-
-### Ports
 * TCP/8080 - viper api
 * TCP/9090 - viper web
 
