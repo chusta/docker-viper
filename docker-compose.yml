@@ -5,7 +5,7 @@ services:
     build: viper
     hostname: viper
     volumes:
-    - /viper:/viper
+    - viperdb:/viper
     ports:
     - 8080:8080
     - 9090:9090
