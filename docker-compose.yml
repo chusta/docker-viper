@@ -7,8 +7,8 @@ services:
     volumes:
     - viperdb:/viper
     ports:
-    - 8080:8080
-    - 9090:9090
+    - 127.0.0.1:8080:8080
+    - 127.0.0.1:9090:9090
     environment:
     - API_PORT=8080
     - WEB_PORT=9090
